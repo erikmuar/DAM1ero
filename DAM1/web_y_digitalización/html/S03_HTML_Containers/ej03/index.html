@@ -81,73 +81,75 @@ HTML5 Tags:
 
 <body>
   <!-- Header -->
-  <header>
 
-    <div id="header">
-      <h1>My Website</h1>
-      <p>This is an example website</p>
 
-    </div>
+  <header id="header">
+    <h1>My Website</h1>
+    <p>This is an example website</p>
+
 
   </header>
 
 
-  <div id="wrapper">
+  <aside id="wrapper">
     <!-- Main Content (left) -->
-    <main>
-      <div id="main">
-        <!-- Welcome Section -->
-        <section>
-          <div id="welcome" class="card">
+
+    <main id="main">
+      <!-- Welcome Section -->
+      <section>
+        <div id="welcome" class="card">
+          <header>
             <h2>Welcome!</h2>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore ut assumenda quasi sunt. Provident
-              iure quas asperiores maxime eaque minus officiis inventore repellendus quae neque, perferendis ea, libero
-              exercitationem labore necessitatibus sapiente porro odio incidunt minima eveniet qui debitis temporibus!
-            </p>
-            <details class="text-center">
+            <h3>subtiitulo</h3>
+          </header>
+          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore ut assumenda quasi sunt. Provident
+            iure quas asperiores maxime eaque minus officiis inventore repellendus quae neque, perferendis ea, libero
+            exercitationem labore necessitatibus sapiente porro odio incidunt minima eveniet qui debitis temporibus!
+          </p>
+          <details class="text-center">
             <summary>Click For More</summary>
             <p>Assumenda nostrum eos quo eveniet aliquam consequuntur, eaque vero reiciendis ducimus exercitationem
               asperiores ipsa hic ab corrupti, cupiditate explicabo culpa rerum. Dicta aliquid harum tempore hic
               debitis, aspernatur aut fuga accusantium deserunt asperiores ab? Provident amet nisi modi magni minus
-              animi sint aliquam esse eius, a ullam nostrum aut voluptatum quisquam blanditiis? Ducimus obcaecati ipsum
+              animi sint aliquam esse eius, a ullam nostrum aut voluptatum quisquam blanditiis? Ducimus obcaecati
+              ipsum
               vel accusantium necessitatibus adipisci ullam.
             </p>
-            </details>
-          </div>
-        </section>
-        <!-- Blog Section -->
-        <section>
-          <div id="blog">
-            <h2>My Blog</h2>
-            <!-- Article One -->
-            <article>
-              <div class="article">
+          </details>
+        </div>
+      </section>
+      <!-- Blog Section -->
 
-                <h3>Article One</h3>
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor ea corporis quisquam natus. Id, culpa
-                  facere nisi iste architecto doloribus asperiores sint distinctio similique cum?
-                </p>
-              </div>
-            </article>
+      <section id="blog">
+        <h2>My Blog</h2>
+        <!-- Article One -->
 
-            <!-- Article Two -->
-            <article>
-              <div class="article">
-                <h3>Article Two</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae deserunt blanditiis impedit autem
-                  aliquam hic ullam, ratione dicta? Reiciendis magni velit reprehenderit minima, nesciunt repellendus!
-                </p>
-              </div>
-            </article>
-          </div>
-      </div>
+        <article class="article">
+
+          <h3>Article One</h3>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor ea corporis quisquam natus. Id, culpa
+            facere nisi iste architecto doloribus asperiores sint distinctio similique cum?
+          </p>
+        </article>
+
+
+        <!-- Article Two -->
+
+        <article class="article">
+          <h3>Article Two</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae deserunt blanditiis impedit autem
+            aliquam hic ullam, ratione dicta? Reiciendis magni velit reprehenderit minima, nesciunt repellendus!
+          </p>
+        </article>
+
       </section>
     </main>
-<aside>
+    </main>
+
     <!-- Sidebar (right) -->
-    <div id="sidebar" class="card">
+    <aside id="sidebar" class="card">
       <nav>
         <h3>Navigation</h3>
         <ul id="nav"></ul>
@@ -166,15 +168,15 @@ HTML5 Tags:
         <li><strong>Phone:</strong> 666 66 66 66</li>
         <li><strong>Email:</strong> fake@fakeweb.com</li>
       </ul>
-    </div>
-  </div>
-</aside>
+    </aside>
+  </aside>
+
   <!-- Footer -->
-   <footer>
-  <div id="footer">
-    <p class="text-center">Copyright &copy; My Website (year)</p>
-  </div>
-  </footer>
+  <section>
+    <footer id="footer">
+      <p class="text-center">Copyright &copy; My Website (year)</p>
+    </footer>
+  </section>
 </body>
 
 </html>
