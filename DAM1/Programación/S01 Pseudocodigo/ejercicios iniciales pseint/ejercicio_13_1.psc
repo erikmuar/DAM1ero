@@ -18,7 +18,7 @@ Algoritmo ejercicio_13
 		
 	
 		
-	Hasta Que (cafe <= 4 y cafe >= 0) 
+	Hasta Que (cafe <= 4 y cafe >= 1) 
 	
 	Mientras flg = Verdadero Hacer
 		
