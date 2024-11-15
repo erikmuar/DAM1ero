@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS prueba DEFAULT character SET'utf-8' DEFAULT COLLATE 'utf8-bin' ;
+
+
