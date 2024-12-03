@@ -1,0 +1,56 @@
+body{
+
+    background-color: bisque;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+}
+
+.container{
+
+    display: grid;
+    grid-template-areas: "cabecera cabecera"
+                         " menu menu"
+                         " contenido lateral"
+                         "footer footer";
+
+    
+    
+    height: 650px;
+
+    
+    border: 1px solid black;
+
+
+}
+
+.caja{
+
+    background-color: aqua;
+    border: 3px solid black;
+    padding : 10px; 
+    height: 150px;
+
+}
+.c1{
+background-color: aquamarine;
+grid-area: cabecera;
+
+
+}
+.c2{
+    background-color: antiquewhite;
+    grid-area: menu;
+
+}
+.c3{
+grid-area: contenido;
+}
+
+.c4{
+
+    grid-area: lateral;
+
+}
+.c5{ 
+    grid-area: footer;
+}
