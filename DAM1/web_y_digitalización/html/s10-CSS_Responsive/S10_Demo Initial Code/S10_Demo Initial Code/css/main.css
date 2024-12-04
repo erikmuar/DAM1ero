@@ -1,0 +1,126 @@
+:root {
+  --primary-color: #EA5D40;
+  --second-color: #FCEEEB;
+  --third-color: #752E20;
+  --fourth-color: #2E120C;
+  --nav-height: 3.5rem;
+  --wrapper-width: 80vw;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--second-color);
+}
+header {
+  background-color: var(--primary-color);
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+}
+h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--second-color);
+  text-align: center;
+}
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.wrapper {
+  width: var(--wrapper-width);
+  margin: 0 auto;
+}
+section, aside {
+  border: 2px solid var(--fourth-color);
+  border-radius: 2px;
+  padding: 1rem
+}
+.card {
+  border: 1px solid var(--third-color);
+  border-radius: 10px;
+  padding: 4rem;
+}
+.grid-layout {
+  display: grid;
+  /* grid-template-columns: 3fr 1fr; */
+  grid-gap: 2rem;
+}
+.grid-list {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+
+/* media query si no ponemos nada estamos modificando la pantalla, el min width siginifica que se aplican los cambios cuando el tamaño pasa de 600px de tamaño*/
+
+@media (min-width: 400px){
+
+  body{
+background-color: red;
+
+
+  }
+
+  .grid-layout {
+    /* display: grid; */
+    grid-template-columns: 3fr 1fr;
+    /* grid-gap: 2rem; */
+  }
+
+  #more-stuff {
+    grid-column: 1 / span 2;
+  }
+}
+
+/* ponemos un overlay para que al poner el movil en horizontal (landscape) cambie la imagen, empieza en display none para que no se vea y al darle la vuelta al movil se activa el flex y cambia la imagen */
+
+.overlay{
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: red;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (orientation: landscape) and (width > 400px){
+
+  body{
+
+    background-color: blue;
+  }
+  .overlay{
+
+    display: flex;
+
+  }
+}
+
+
+nav ul {
+display: flex;
+
+
+}
+
+@media (width < 400px){
+
+.burger-btn{
+
+  display: none;
+
+}
+  
+
+}
