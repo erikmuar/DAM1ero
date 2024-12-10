@@ -68,6 +68,8 @@ SELECT COUNT(productid) FROM products WHERE categoryid = 2 and unitprice > 20;
 
 /*18 .Fes una query que retorni la xifra del producte més car de la taula Products. */ 
 
+SELECT 
+
  
 
 /*19 .Retorna el preu mig de la taula Products. Usamos el round para que no salga con decimales*/
