@@ -1,0 +1,72 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.box {
+  width: 200px;
+  height: 200px;
+  background-color: rgb(47, 0, 255);
+  border-radius: 100%;
+  animation-name: cuadraturaDelCirculo;
+  animation-duration: 1s; /* cuanto dura la animación*/ 
+  animation-iteration-count: infinite; /*Cuantas veces hace la animacion*/
+  /* animation-direction:alternate-reverse; */
+  animation-fill-mode: forwards;
+  animation-delay: 4s;
+  animation: cuadraturaDelCirculo 1s ease-out infinite;
+  transition: border-radius 2s, background-color 3s; /*le estoy diciendo al explorador que si el border radius cambia, que lo haga en x segundos*/;
+}
+
+.box:hover{
+  border-radius: 0%;
+  background-color:chartreuse;
+  /* transform: rotate(160deg); */
+  /* transform: translate(100px,200px) scale(0.5); */
+
+}
+
+/*.box:active {
+   ease-in-out 
+  animation: changeColor 3s linear infinite;
+}*/
+
+/* @keyframes
+ cuadraturaDelCirculo {
+
+  0% {
+    border-radius: 100%;
+    background-color: aqua;
+    height: 200px;
+  }
+  50%{
+    border-radius: 0%;
+    background-color: yellow;
+    transform: rotate(90deg);
+  }
+  100%{
+    border-radius: 100%;
+    height: 550px;
+  }
+
+}
+
+@keyframes changeColor {
+  0% {
+    background-color: red;
+    width: 200px;
+  }
+  25% {
+    background-color: yellow;
+  }
+  75% {
+    background-color: blue;
+    width: 300px;
+  }
+  100% {
+    background-color: red;
+    width: 200px;
+  }
+} */
