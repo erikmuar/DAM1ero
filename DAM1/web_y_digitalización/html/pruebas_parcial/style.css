@@ -1,0 +1,22 @@
+.float-left{
+    float: left;
+    width: 400px;
+}
+
+/* Crea una clase CSS que haga que el texto de un párrafo se torne rojo y el cursor cambie cuando se haga clic en él.*/
+
+.cambio:active{
+
+color: red;
+cursor:crosshair;
+
+}
+
+/* Escribe una classe CSS que tenga una transición para que cuando se cambie el color de fondo del elemento, se haga con una animación de 1 segundo.*/
+
+.transicion-fondo{
+
+    background-color: aquamarine;
+    transition: background-color 1s ease-in-out;
+
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<students>
+    <student id="1">
+        <name> Alice</name>
+        <surname> Jimenez</surname>
+        <phone> 123456789</phone>
+    </student>
+
+    <student id="2">
+        <name> Alice</name>
+        <surname> Jimenez</surname>
+        <phone> 123456789</phone>
+    </student>
+
+    <student id="2">
+        <name> Alice</name>
+        <surname> Jimenez</surname>
+        <phone> 123456789</phone>
+    </student>
+
+</students>
