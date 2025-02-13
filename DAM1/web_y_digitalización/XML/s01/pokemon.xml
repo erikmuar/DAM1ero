@@ -1,0 +1,52 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<pokemons>
+
+    <pokemon id="1">
+        <name> Bulbasaur </name>
+        <type> leaf </type>
+        <velocity> 30</velocity>
+        <damage> 20</damage>
+        <hp>100</hp>
+        <habilities>
+            <habilitiy name="latigo cepa" d="300">
+                <type> x </type>
+                <type> y </type>
+            </habilitiy>
+        </habilities>
+        <sexo>poco</sexo>
+        <evolvesto>2</evolvesto>
+    </pokemon>
+
+    <pokemon id="4">
+        <name> Charmander </name>
+        <type> fire </type>
+        <velocity> 35</velocity>
+        <damage> 30</damage>
+        <hp>80</hp>
+        <habilities>
+            <habilitiy name="ascuas" d="60">
+                <type> f </type>
+                <type> k </type>
+            </habilitiy>
+        </habilities>
+        <sexo>mucho</sexo>
+        <evolvesto>5</evolvesto>
+    </pokemon>
+
+    <pokemon id="7">
+        <name> squirtle </name>
+        <type> water </type>
+        <velocity> 10</velocity>
+        <damage> 25</damage>
+        <hp>90</hp>
+        <habilities>
+            <habilitiy name="pistola agua" d="40">
+                <type> r </type>
+                <type> c </type>
+            </habilitiy>
+        </habilities>
+        <sexo>se hace lo que se puede</sexo>
+        <evolvesto>8</evolvesto>
+    </pokemon>
+</pokemons>
