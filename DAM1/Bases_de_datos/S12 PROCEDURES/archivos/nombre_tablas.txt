@@ -1,0 +1,13 @@
+categories
+customercustomerdemo
+customerdemographics
+customers
+employees
+employeeterritories
+orderdetails
+orders
+products
+region
+shippers
+suppliers
+territories
