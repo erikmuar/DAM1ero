@@ -32,18 +32,6 @@ const cubo = a => a**3;
 
 
 
-let user1 = {
-
-name:"alice",
-age:100,
-favPokemon: {
-id:25,
-name:"Pikachu",
-
-  }
-}
-
-
 
 
 

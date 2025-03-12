@@ -1,0 +1,108 @@
+EX 1 
+
+Volem fer un script que ens generi un fitxer anomenat ips.txt en el que veiem les ips des de la que es connecta cadascun dels usuaris, i quin és el login de l'usuari que es connecta a través d'aquesta ip, tal i com podem veure a continuació:
+10.10.20.100 josepgc
+10.10.20.205 martavg
+
+
+
+who | awk 'print{$5, $1}' | tr -d '()' > ips.txt
+echo "Fichero ips.txt creado" 
+
+
+EX 2 
+
+Volem fer un script que ens permeti afegir usuaris a l'arxiu alumnes.txt, en el que tinguem els següents camps:
+id_unic: nom: cognoms: especialitat
+27:juan:perez:asix
+32:josep:garcia:dam
+.....
+El id_unic l'ha de generar de forma automàtica el script, hi ha de ser l'últim valor del id + 1. A continuació ha de demanar el nom, cognoms i etapa (dam, daw, asix) per a continuació afegir les dades al fitxer.
+
+if [ ! -f alumnes2.txt ]
+then 
+	> alumnes2.txt
+fi
+
+id=$(awk -F: 'END (print $1)' alumnes2.txt)
+
+if [ -z "$id" ]
+then 
+	id=1
+else 
+	id=$(($id + 1))
+fi  
+
+echo -n "nom: "
+read nom
+
+echo -n "cognom"
+read cognom
+
+echo -n "especialitat: "
+read especialitat
+
+echo "$id:$nom:$cognom:$especialitat" >> alumnes2.txt
+
+EX 3 
+
+Volem fer un script que ens permeti registrar els dies i les hores en que un alumne entra a l'escola, de forma quan entra l'alumne a l'escola posa el seu identificador únic i el script avalua sobre el fitxer alumnes.txt a quin usuari correspon aquest identificador. Com a resultat, el script afegirà una línia a l'arxiu entradesAlumnnes.txt amb els següents camps:
+id_unic:cognom1:data_entrada:hora_entrada
+27;perez:26 feb 2025;14:44:55
+32;garcia;26 fe 2025;15:00:13
+
+
+
+echo -n "Introduce una ID:"
+read id
+
+existe=$(awk -F: -v existe="$id" '$1==existe{print $0}' alumnes.txt)
+
+if [ -n "$existe" ]
+then 
+	echo "$(awk -F: -v alumne="$id" '$1==alumne {print $1"':'"$3}' alumnes2.txt):$(date +%D):$(date +%T)" >> entradaAlumnes.txt
+fi
+
+ 
+EX4
+Volem fer un script que, a partir del fitxer entradesAlumnes.txt, ens generi un informe d'assistència corresponent a un determinat dia, en el que veiem els alumnes, en ordre alfabètic, que han vingut aquell dia amb les corresponents hores d'entrada.
+
+
+#!/bin/bash
+
+if [[ ! -f asistencia.txt ]]
+then
+        > asistencia.txt
+fi
+
+echo -n "Introduce una fecha (dd/mm/yy) "
+read fecha
+
+alumnes=$(awk -F: -v var=$fecha '$3==var{print $1, $2}' entradaAlumnes.txt | sort -k2)
+
+echo "$alumnes"
+
+
+
+EX 5 
+Fes un script que ens generi un fitxer amb la taula de multiplicar del número entrat per línnia de comanes. El script avaluarà si s'ha ficat un número per línia de comandes, i en cas que no ho hagi fet ens dira "Has de ficar un número com a paràmetre". El nom del fitxer generat serà taula_"num".txt
+
+#!/bin/bash
+
+
+
+case $1 in 
+	[0-9]*)
+
+		> taula_$1.txt
+
+		for i in $(seq 0 10)
+		do 
+			echo "$1 * $i = $(($1*$i))" >> taula_$1.txt
+		done 
+		;;
+
+	*) 
+		echo "No es un numero" 
+		;; 
+esac 
