@@ -48,3 +48,40 @@ END $$
 
 DELIMITER ;
 
+
+
+
+
+--EXERCICI 3:
+--Useu la base de dades mymovies.
+--Creeu un procedure nou que permeti a l'usuari calcular els beneficis d'una pel·lícula en concret especificant el seu id de pel·lícula.
+--Els beneficis de les pel·lícules es calculen multiplicant la columna stockUnits * price.
+--Els beneficis de la peli s'han de guardar en una variable de sortida.
+--Aquest procedure només té un paràmetre.
+
+--El seu call per exemple podria ser:
+
+--DECLARE X FLOAT;
+--SET X = 36;
+--CALL calculateRevenue(X);
+--SELECT X;
+
+--Amb aquestes pistes, ja sabeu com s'ha de dir el procedure i quins tipus de paràmetres ha de tenir.
+
+
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS calculateRevenue $$
+
+CREATE PROCEDURE calculateRevenue(IN movieID INT, OUT revenue FLOAT)
+BEGIN
+    SELECT stockUnits * price
+    INTO revenue
+    FROM movies
+    WHERE id = movieID;
+END $$
+
+DELIMITER ;
+
