@@ -1,0 +1,12 @@
+body {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+div{
+    margin: 10px 0;
+}
+
