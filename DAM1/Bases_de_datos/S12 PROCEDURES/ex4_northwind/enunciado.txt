@@ -1,0 +1,101 @@
+Crearem un procediment a la BD northwind amb l'objectiu de generar i exportar un informe per cada país amb el resum de les comandes creades, la varietat de productes demanats, la totalitat d'unitats encarregades i el benefici total generat.
+
+Crea un procediment anomenat exportOrderDetailsPerCountry() sense paràmetres.
+Crea un cursor curCountries amb només el nom dels diferents països presents a la taula northwind.customers.
+
+
+Per a cada iteració del cursor, genera un fitxer anomenat 'Country_OrderDetailsResum.csv' on 'Country' ho canviarem pel nom del país en cada cas. Per tant, usarem sentència dinàmica.
+
+
+Aquests fitxers exportats, contindran les següents columnes amb la informació de:
+a) Nom del País AS País
+b) Recompte de les comandes demanades AS QuantitatComandes (pista: northwind.orders.orderid)
+c) Recompte de la varietat de diferents productes demanats AS QuantitatProductesDiferents (pista: northwind.ordersdetails.productid)
+d) Sumatori d'unitats totals encarregades entre totes les comandes de cada país AS QuantitatUnitats (pista: northwind.orderdetails.quantity)
+e) Sumatori del total de benefici generat entre totes les comandes de cada país AS ImportTotalComandes (pista: northwind.orderdetails.UnitPrice)
+
+El fitxer separarà els camps per ';', opcionalment enclausarà els textos amb '"'" i separarà les files per '\n'.
+
+PISTA 1
+
+SELECT c.country as País
+, COUNT(DISTINCT o.orderid) AS QuantitatComandes
+        , COUNT(DISTINCT od.ProductID) AS QuantitatProductesDiferents
+        , SUM(od.Quantity) AS QuantitatUnitats
+        , TRUNCATE(SUM(od.UnitPrice*od.Quantity)) AS ImportTotalComandes
+FROM orders o INNER JOIN customers c ON o.customerid = c.customerid
+ INNER JOIN orderdetails od ON o.orderid = od.orderid
+GROUP BY c.country;
+
+SET @vCountry = "Germany";
+SET @sintaxi = CONCAT("SELECT c.country as País
+, COUNT(DISTINCT o.orderid) AS QuantitatComandes
+, COUNT(DISTINCT od.ProductID) AS QuantitatProductesDiferents
+, SUM(od.Quantity) AS QuantitatUnitats
+, TRUNCATE(SUM(od.UnitPrice*od.Quantity)) AS ImportTotalComandes
+INTO OUTFILE '",@vCountry,"_OrderDetailsResum.csv'",
+"FIELDS TERMINATED BY ';'
+OPTIONALLY ENCLOSED BY '\"'
+LINES TERMINATED BY '\\n'
+FROM orders o INNER JOIN customers c ON o.customerid = c.customerid
+ INNER JOIN orderdetails od ON o.orderid = od.orderid
+WHERE c.country ='",@vCountry,"';");
+PREPARE execucio FROM @sintaxi;
+EXECUTE execucio;
+DEALLOCATE PREPARE execucio;
+
+/*Crearem un procediment a la BD northwind amb l'objectiu de generar i exportar un informe per cada país amb el resum de les comandes creades, la varietat de productes demanats, la totalitat d'unitats encarregades i el benefici total generat.
+
+Crea un procediment anomenat exportOrderDetailsPerCountry() sense paràmetres.
+Crea un cursor curCountries amb només el nom dels diferents països presents a la taula northwind.customers.
+
+
+Per a cada iteració del cursor, genera un fitxer anomenat 'Country_OrderDetailsResum.csv' on 'Country' ho canviarem pel nom del país en cada cas. Per tant, usarem sentència dinàmica.
+
+
+Aquests fitxers exportats, contindran les següents columnes amb la informació de:
+a) Nom del País AS País
+b) Recompte de les comandes demanades AS QuantitatComandes (pista: northwind.orders.orderid)
+c) Recompte de la varietat de diferents productes demanats AS QuantitatProductesDiferents (pista: northwind.orders.productid)
+d) Sumatori d'unitats totals encarregades entre totes les comandes de cada país AS QuantitatUnitats (pista: northwind.orderdetails.quantity)
+e) Sumatori del total de benefici generat entre totes les comandes de cada país AS ImportTotalComandes (pista: northwind.orderdetails.UnitPrice)
+
+El fitxer separarà els camps per ';', opcionalment enclausarà els textos amb '"'" i separarà les files per '\n'.*/
+USE northwind;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS exportOrderDetailsPerCountry$$
+CREATE PROCEDURE exportOrderDetailsPerCountry()
+BEGIN
+    DECLARE done INT DEFAULT 0;
+    DECLARE var1 VARCHAR(15);
+    DECLARE curCountries CURSOR FOR SELECT distinct( c.Country) FROM customers AS c;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done=1;
+
+    OPEN curCountries;
+        bucle1:LOOP
+            FETCH curCountries INTO var1;
+            IF done=1 THEN
+                LEAVE bucle1;
+            END IF;
+            SET @country = var1;
+            set @aux = concat('SELECT c.country AS pais, COUNT(o.orderid) AS comandes, 
+						COUNT(DISTINCT(p.productid)) AS productes, 
+                        SUM(od.quantity) AS encarrecs, 
+                        TRUNCATE(SUM(od.UnitPrice),2) AS benefici 
+                INTO OUTFILE "C:/xampp/mysql/data/northwind/', @country ,'_OrderDetailsResum.csv" FIELDS TERMINATED BY ";" OPTIONALLY ENCLOSED BY "," LINES TERMINATED BY "\n"
+                FROM customers AS c, orders AS o, orderdetails AS od, products AS p 
+                    WHERE o.CustomerID = c.CustomerID 
+                    AND o.OrderID = od.OrderID 
+                    AND od.ProductID = p.ProductID
+                    AND c.Country ="', @country,'"
+					GROUP BY c.Country');
+            PREPARE stmt1 FROM @aux;
+			EXECUTE stmt1;
+			DEALLOCATE PREPARE stmt1;
+        END LOOP bucle1;
+    CLOSE curCountries;
+END $$
+DELIMITER ;
+
+CALL exportOrderDetailsPerCountry();
