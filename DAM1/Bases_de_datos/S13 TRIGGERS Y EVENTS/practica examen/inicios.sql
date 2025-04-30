@@ -20,7 +20,7 @@ Operaciones --> INSERT UPDATE DELETE
 Una tabla solo puede tener un trigger asociado por temporalidad y operacion a controlar.
 
 
-
+   
 
 OLD./NEW.
 
