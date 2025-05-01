@@ -5,8 +5,7 @@ DROP TRIGGER IF EXISTS trigger_historico
 CREATE TRIGGER trigger_historico AFTER UPDATE ON personal
 FOR EACH ROW
 BEGIN
-    INSERT INTO historico nombre_antiguo , nombre_nuevo , usuario,
-        fecha)
+    INSERT INTO historico (nombre_antiguo , nombre_nuevo , usuario,fecha)
     VALUES (OLD.nombre , NEW.nombre , CURRENT_USER(), NOW()
 END $$
 DELIMITER;
@@ -124,8 +123,98 @@ nombre_nuevo --> Pablo
 usuario --> root@localhost
 fecha --> 2019 03 18 14:35:43
 
+#############################################################################################################################################################################################
+
+# Crea un trigger que inserte quien es el usuario que esta usando en ese momento la tabla, el nombre antiguo, el nombre nuevo, el nombre de usuario y el momento exacto en el que se ha hecho  en la tabla historico 
 
 
+DROP TABLE IF EXISTS historico;
+
+CREATE TABLE historico( 
+
+id INT NOT NULL AUTO_INCREMENT,
+nombre_antiguo VARCHAR(10) NOT NULL,
+nombre_nuevo VARCHAR(15) NOT NULL, 
+usuario VARCHAR(30) NOT NULL,
+fecha DATETIME,
+PRIMARY KEY (id)
+);
+
+CREATE TABLE personal(
+ID INTEGER NOT NULL AUTO_INCREMENT,
+nombre VARCHAR(20),
+apellido VARCHAR(20),
+PRIMARY KEY(ID)
+);
+
+
+DELIMETER $$
+DROP TRIGGER IF EXISTS cambio_valores $$
+CREATE TRIGGER cambio_valores AFTER UPDATE ON historico
+FOR EACH ROW 
+BEGIN 
+
+  INSERT INTO historico(nombre_antiguo, nombre_nuevo, usuario, fecha) VALUES (OLD.nombre, NEW.nombre, CURRENT_USER(), NOW());
+
+END $$ 
+
+DELIMITER; 
+
+
+
+
+################################################################# S06 ############################################################################################
+
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS modificaciones $$
+CREATE TRIGGER modificaciones AFTER UPDATE ON ServerStatus
+ON EACH ROW 
+BEGIN 
+
+  IF NEW.is_broken IS TRUE THEN
+    INSERT INTO alertas VALUES (null, 'Prioritario', 'El servidor',NEW.id_servidor, 'está estropeado', null, NOW());
+
+    
+  END IF 
+
+  IF NEW.ram_upgrade IS TRUE THEN
+      INSERT INTO alertas VALUES (null, 'Mantenimiento', CONCAT('Ram en el servidor ', NEW.id_servidor, 'aumentada.'), null, NOW());
+      UPDATE servidor SET ram = ram + 256 WHERE NEW.id_servidor = id_servidor; 
+
+  END IF 
+
+  IF NEW.ram_downgrade IS TRUE THEN
+
+      SET @vram = (SELECT ram FROM servidor WHERE id_servidor = NEW.id_servidor); 
+      IF @vram > 256
+        
+        INSERT INTO ServerStatus(alerta, descripcion, fecha) VALUES ('Mantenimiento', CONCAT('Ram en el servidor ', ID_SERVIDOR, 'reducida.'), NOW());
+  END IF 
+
+
+  END $$
+
+  DELIMITER ;
+
+
+DELIMITER $$ 
+
+  DROP TRIGGER IF EXISTS delete_server $$
+  CREATE TRIGGER delete_server AFTER DELETE ON ServerStatus
+  ON EACH ROW 
+  BEGIN 
+    INSERT INTO ServerStatus(alerta, descripcion, fecha) VALUES ('Baja', CONCAT('El servidor ',ID_SERVIDOR,' ha sido dado de baja'), NOW());
+
+  END $$ 
+
+  DELIMITER ;
+
+
+
+
+
+#############################################################################################################################################################################################
 
 ######################### EVENTOS ########################################
 
@@ -150,7 +239,7 @@ DELIMITER;
 
 Programada --> AT 
 
-Planificada --> Every 
+Planificada --> EVERY  
 
 Podemos trabajar con intervalos de tiempo: YEAR, MONTH, DAY, WEEK, etc.ABORT
 Podemos definir inicio (STARTS) y final (ENDS) para los eventos.
@@ -171,6 +260,20 @@ SHOW EVENTS;
 
 # Muestra la creación de los eventos:
 SHOW CREATE EVENT event_log_diario;
+
+
+# Llamada a un procedimiento desde un evento: 
+
+DELIMITER $$ 
+
+DROP EVENT IF EXISTS evento_log_procedimiento $$ 
+CREATE EVENT evento_log_procedimiento 
+ON SCHEDULE AT CURRENT_TIMESTAMP() + INTERVAL 1 MINUTE
+DO BEGIN 
+  CALL nombre_procedimiento()
+END $$ 
+DELIMITER; 
+
 
 
 
@@ -209,3 +312,4 @@ DO BEGIN
   DEALLOCATE PREPARE stmt1;
 END $$
 DELIMITER ;
+
