@@ -1,4 +1,4 @@
-DELIMITER $$
++DELIMITER $$
 DROP TRIGGER IF EXISTS update_servidorstatus $$
 CREATE TRIGGER update_servidorstatus AFTER UPDATE ON servidorstatus
 FOR EACH ROW
