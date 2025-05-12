@@ -1,3 +1,84 @@
+--1 
+
+SELECT table_name 
+  INTO OUTFILE 'RUTA_FICHERO/nom_taules.txt' 
+  LINES TERMINATED BY ';\n' 
+  FROM information_schema.TABLES 
+  WHERE TABLE_SCHEMA="INTRODUCIR_NOMBRE_BBDD" 
+    AND TABLE_TYPE = "base table"
+SELECT table_name 
+  INTO OUTFILE 'RUTA_FICHERO/nombre_tablas.txt' 
+  LINES TERMINATED BY ';\n' 
+  FROM information_schema.TABLES 
+  WHERE TABLE_SCHEMA="INTRODUCIR_NOMBRE_BBDD" 
+    AND TABLE_TYPE = "base table"
+
+--2
+
+
+CREATE DATABASE bkp_s5_ej2;
+USE bkp_ejercicio2;
+CREATE TABLE tabla1 LIKE BBDD_ORIGEN.tabla1;
+INSERT INTO tabla1 SELECT * FROM BBDD_ORIGEN.tabla1;
+….
+CREATE TABLE tablaN LIKE BBDD_ORIGEN.tablaN;
+INSERT INTO tablaN SELECT * FROM BBDD_ORIGEN.tablaN;
+CREATE DATABASE bkp_s5_ej2;
+USE bkp_ejercicio2;
+CREATE TABLE tabla1 LIKE BBDD_ORIGEN.tabla1;
+INSERT INTO tabla1 SELECT * FROM BBDD_ORIGEN.tabla1;
+ 
+# Repentir tantas veces como haga falta segun las tablas que tengamos
+
+CREATE TABLE tablaN LIKE BBDD_ORIGEN.tablaN;
+INSERT INTO tablaN SELECT * FROM BBDD_ORIGEN.tablaN;
+
+--3 
+
+CREATE DATABASE s5_ej3;
+USE s5_ej3;
+CREATE TABLE pais(
+    id INTEGER AUTO_INCREMENT,
+    nombre_pais VARCHAR(20),
+    habitantes INTEGER,
+    PRIMARY KEY (id)
+);
+INSERT INTO pais (nombre_pais, habitantes) VALUES 
+("Irlanda",4500000),
+("Suecia",1000000),
+("Dinamarca",5600000);
+SELECT nombre_pais, habitantes/(SELECT sum(habitantes) FROM pais)*100
+  INTO OUTFILE 'RUTA_FICHERO/pais_habitantes.txt'
+  FIELDS TERMINATED BY ','
+  LINES TERMINATED BY ';\n'
+  FROM pais;
+
+
+--4
+
+CREATE DATABASE s5_ej4;
+USE s5_ej4;
+
+CREATE TABLE cuenta_bancaria(
+    numero_cuenta INTEGER,
+    saldo DOUBLE,
+    PRIMARY KEY (numero_cuenta)
+);
+
+INSERT INTO cuenta_bancaria(numero_cuenta, saldo) VALUES 
+(1,-100),
+(2,2000),
+(3,0);
+
+SELECT *
+  INTO OUTFILE 'RUTA_FICHERO/numeros_rojos.txt'
+  FIELDS TERMINATED BY ','
+  LINES TERMINATED BY ';\n'
+  FROM cuenta_bancaria
+  WHERE saldo < 0;
+
+--5 
+
 # Tablas
 
 CREATE TABLE IF NOT EXISTS `persona` (
@@ -171,6 +252,30 @@ BEGIN
 
   END LOOP bucle;
   CLOSE cur1;
+
+END $$
+DELIMITER ;
+
+
+--6 
+
+DELIMITER  $$
+DROP PROCEDURE IF EXISTS  lsCloudLocation  $$
+CREATE PROCEDURE  lsCloudLocation (IN vlocalizacion varchar(50), OUT vnumservidores INT)
+BEGIN
+SET vnumservidores = (SELECT COUNT(id) FROM servidor);
+IF vnumservidores = 0 THEN 
+	SET @aux = CONCAT ("SELECT 'Localización no valida!' into outfile 'location_", vlocalizacion,"_",CURDATE(), ".txt' FIELDS TERMINATED BY ', ' LINES TERMINATED BY '\n'");
+	PREPARE stmt1 FROM @aux;
+	EXECUTE stmt1;
+	DEALLOCATE PREPARE stmt1;
+ELSE
+	SET @aux = CONCAT ("SELECT servername, nick FROM servidor AS s, usuario AS u WHERE s.id_usuario = u.id_usuario 
+	AND s.localitzacion LIKE '",vlocalitzacio ,"' into outfile 'location_", vlocalizacion,"_",CURDATE(), ".txt' FIELDS TERMINATED BY ', ' LINES TERMINATED BY '\n'");
+	PREPARE stmt1 FROM @aux;
+	EXECUTE stmt1;
+	DEALLOCATE PREPARE stmt1;
+END IF;
 
 END $$
 DELIMITER ;

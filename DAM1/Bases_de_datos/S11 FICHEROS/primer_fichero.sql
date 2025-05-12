@@ -47,3 +47,7 @@ LOAD DATA INFILE 'C:/Users/maria/OneDrive/Documents/DAM1/DAM1ero/DAM1/Bases_de_d
 INTO TABLE nom_paisos FIELDS TERMINATED BY '\t' 
 ENCLOSED BY '"' 
 LINES TERMINATED BY '\n';
+
+
+
+

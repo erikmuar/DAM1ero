@@ -42,6 +42,7 @@ BEGIN
     IF vContactName IS NULL THEN
         SET vContactName = 'Error: Cliente no encontrado';
     END IF;
+    
 END $$
 
 DELIMITER ;
