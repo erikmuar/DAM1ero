@@ -66,3 +66,10 @@ CREATE OR REPLACE TYPE noticia_t AS OBJECT (
 
 );
 /
+
+
+
+
+
+
+
