@@ -1,0 +1,17 @@
+Genera una taula amb 100 registres simulant dades d'activitats físiques d'una aplicació anomenada FitWell. Cada registre ha de contenir les següents columnes:
+
+- id_usuari: enter entre 1 i 10
+
+- data_activitat: format YYYY-MM-DD, amb dates entre 2024-01-01 i 2024-04-15
+
+- hora_inici: format HH:MM (hora del dia aleatòria)
+
+- durada_minuts: enter entre 5 i 120
+
+- tipus_activitat: un dels següents valors — caminar, córrer, bicicleta, ioga, natació
+
+- calories: enter entre 30 i 1000
+
+- dispositiu: un dels següents valors — smartwatch, mòbil, pulsera
+
+El format ha de ser CSV, amb la primera fila com a capçalera. No cal comentaris, només el contingut del fitxer CSV.

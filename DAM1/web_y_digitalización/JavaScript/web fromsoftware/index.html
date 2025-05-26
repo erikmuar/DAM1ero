@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="script.js" defer></script>
+
+</head>
+<body>
+
+    <div class="cookie-consent-modal ">
+
+        <div class="content">
+            <h1>Permitir Cookies</h1>
+            <p class="msg-principal ">
+                Este sitio web utiliza cookies. Utilizamos cookies propias y de terceros para mejorar tu experiencia de navegación, analizar el tráfico del sitio y ofrecer contenido personalizado. <br> 
+                <a href="https://www.youtube.com/shorts/QbpUzHHNo00" target="_blank">Aquí</a> podrás encontrar nuestra política de cookies. Haz click en aceptar para poder seguir navegando. 
+            </p>
+            <p class="msg-secundario">Solo se utilizarán las cookies estrictamente necesarias para el funcionamiento del sitio.
+                Puedes cambiar tu decisión en cualquier momento desde la configuración de privacidad.</p>
+                <div class="btns">
+                    <button class="btn rechazar">Rechazar</button>
+                    <button class="btn aceptar">Aceptar</button>
+                    <!-- localStorage.removeItem("cookiesAccepted");-->
+                </div>
+        </div>
+
+    </div>
+
+    <div class="header">
+
+        <div class="logo">
+            <a href=""><img src="/img/logo.png" alt="from software" class="logo-img"></a>
+        </div>
+
+        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌙</button>
+
+
+        <button class="login-btn">Iniciar sesión</button>
+
+        <div id="login-modal" class="login-modal hidden">
+            <div class="login-content">
+              <span id="close-login" class="close-btn">&times;</span>
+              <h2>Iniciar Sesión</h2>
+              <form id="login-form">
+                <input type="email" id="email" placeholder="Correo electrónico" required>
+                <input type="password" id="password" placeholder="Contraseña" required>
+                <button type="submit" class="btn aceptar">Entrar</button>
+              </form>
+              <p id="login-error" class="error-msg"></p>
+            </div>
+          </div>
+          
+
+
+        <div class="off-screen-menu">
+            <ul>
+                <li><a href="#darksouls1">Dark Souls I</a></li>
+                <li><a href="#darksouls2">Dark Souls II</a></li>
+                <li><a href="#darksouls3">Dark Souls III</a></li>
+                <li><a href="#bloodborne">Bloodborne</a></li>
+                <li><a href="#sekiro">Sekiro</a></li>
+                <li><a href="#eldenring">Elden Ring</a></li>
+            </ul>
+        </div>
+
+        
+        <div class="ham-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        
+
+    </div>
+
+
+
+    <section id="Hero">
+        <div class="hero-item">
+          <img src="/img/darksouls1.jpg" class="hero-img">
+          <div class="hero-caption">Dark Souls I</div>
+        </div>
+        <div class="hero-item">
+          <img src="/img/darksouls2.jpg" class="hero-img">
+          <div class="hero-caption">Dark Souls II</div>
+        </div>
+        <div class="hero-item">
+          <img src="/img/darksouls3.jpg" class="hero-img">
+          <div class="hero-caption">Dark Souls III</div>
+        </div>
+        <div class="hero-item">
+          <img src="/img/bloodborne.jpg" class="hero-img">
+          <div class="hero-caption">Bloodborne</div>
+        </div>
+        <div class="hero-item">
+          <img src="/img/sekiro.jpg" class="hero-img">
+          <div class="hero-caption">Sekiro</div>
+        </div>
+        <div class="hero-item">
+          <img src="/img/eldenring.jpg" class="hero-img">
+          <div class="hero-caption">Elden Ring</div>
+        </div>
+      </section>
+      
+    <div id="tooltip" class="tooltip"></div>
+
+
+    <section class="game-list">
+
+        <article class="game-block">
+          <div class="game-text">
+            <h2 id="darksouls1">Dark Souls I</h2>
+            <p>
+              Dark Souls I marcó el inicio de una saga que redefinió la dificultad y la narrativa ambiental. Su mundo interconectado, su atmósfera oscura y su filosofía de "aprende muriendo" cautivaron a millones.
+            </p>
+          </div>
+          <img  src="/img/darksouls1.jpg" alt="Dark Souls I">
+
+        </article>
+      
+        <article class="game-block">
+          <div class="game-text">
+            <h2 id="darksouls2" >Dark Souls II</h2>
+            <p>
+              En Dark Souls II, el reino de Drangleic nos presenta una visión más melancólica y fragmentada. Aunque polémico por algunos cambios, sigue siendo un reto memorable lleno de secretos.
+            </p>
+          </div>
+          <img src="/img/darksouls2.jpg" alt="Dark Souls II">
+        </article>
+      
+        <article class="game-block">
+          <div class="game-text">
+            <h2 id="darksouls3">Dark Souls III</h2>
+            <p>
+              El cierre de la trilogía llega con Dark Souls III, una mezcla refinada de velocidad, diseño de niveles y lore. Lothric es un mundo que se derrumba con estilo y épica.
+            </p>
+          </div>
+          <img src="/img/darksouls3.jpg" alt="Dark Souls III">
+        </article>
+      
+        <article class="game-block">
+          <div class="game-text">
+            <h2 id="bloodborne">Bloodborne</h2>
+            <p>
+              Bloodborne es una obra maestra gótica inspirada en Lovecraft. Su combate agresivo, su atmósfera enfermiza y su lore retorcido lo convierten en uno de los juegos más intensos de FromSoftware.
+            </p>
+          </div>
+          <img src="/img/bloodborne.jpg" alt="Bloodborne">
+        </article>
+      
+        <article class="game-block">
+          <div class="game-text">
+            <h2 id="sekiro">Sekiro: Shadows Die Twice</h2>
+            <p>
+              Un giro hacia la acción más pura: Sekiro mezcla sigilo, precisión y una narrativa directa. Aquí no subes de nivel: mejoras tu habilidad como jugador. Todo se basa en el ritmo y la perfección del parry.
+            </p>
+          </div>
+          <img src="/img/sekiro.jpg" alt="Sekiro">
+        </article>
+      
+        <article class="game-block">
+          <div class="game-text">
+            <h2 id="eldenring">Elden Ring</h2>
+            <p>
+              Elden Ring es el alma de los Souls en un mundo abierto. Con libertad total, jefes majestuosos y una narrativa creada junto a George R.R. Martin, es la culminación del estilo FromSoftware.
+            </p>
+          </div>
+          <img src="/img/eldenring.jpg" alt="Elden Ring">
+        </article>
+      
+    </section>
+      
+
+
+      <footer class="site-footer">
+        <p>
+          ¿Quieres más información? Visita 
+          <a href="https://www.fromsoftware.jp/ww/" target="_blank" rel="noopener noreferrer">
+            fromsoftware.jp
+          </a>, el sitio oficial de From Software, la web que he intentado emular.
+        </p>
+      </footer>
+
+      
+</body>
+</html>
+
+
